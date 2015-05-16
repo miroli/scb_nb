@@ -11,6 +11,22 @@ response = scb.filter(code='Tid', kind='item', values=['2014']).get()
 df = pd.read_csv(response)
 ```
 
+##Background
+This section describes the general outline of the API provided by SCB. The original docs can be [found here](http://www.scb.se/Grupp/OmSCB/API/API-beskrivning.pdf) (Swedish).
+
+For any given table, the URL for the table has the following format:
+```
+API-NAME/API-VERSION/LANGUAGE/DATABASE-ID/<LEVELS>/TABLE-ID
+```
+
+where `API-NAME` currently translates to `http://api.scb.se/OV0104/`. The current version is 1, and possible languages are `sv` or `en`, and the `DATABASE-ID` is `ssd`. The depth of the number of levels depend on the requested table. So, effectively, any given table URL will have the following structure:
+
+```
+http://api.scb.se/OV0104/v1/sv/ssd/<LEVELS>/TABLE-ID
+```
+It's rarely obvious where the data you're looking for is actually located. For that reason, this library provides a cursor-like object which allows you to quickly jump around between the levels of the database. Once you find the table you're looking for, you're provided with a number of filters. SCB implements a limit of 100,000 rows per request so filtering is often needed.
+
+
 ##Quickstart
 Here's a workflow example. Note that these operations are executed within the notebook environment.
 
