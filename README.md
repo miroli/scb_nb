@@ -7,8 +7,7 @@ import pandas as pd
 from SCB import SCB
         
 scb = SCB('http://api.scb.se/OV0104/v1/doris/sv/ssd/BE/BE0101/BE0101H/FoddaK')
-response = scb.filter(code='Tid', kind='item', values=['2014']).get()
-df = pd.read_csv(response)
+df = scb.filter(code='Tid', kind='item', values=['2014']).get()
 ```
 
 ##Background
@@ -49,17 +48,9 @@ At this point, `scb` points to an actual table and we can call `describe` to get
 ```python
 scb.describe() # list possible filters
 scb.filter(code='Tid', kind='item', values=['2014']) # filter the results
-data = scb.get() # fetch the data
+df = scb.get() # save the data in a pandas dataframe
 ```
-
-####Plug in to pandas
-`data` contains all the returned data in CSV format as a `StringIO` object. This means that we can just pass the object to a pandas DataFrame constructor with the `read_csv` method.
-```python
-import pandas as pd
-df = pd.read_csv(data)
-```
-
-Boom! From this point on `df` is just your ordinary pandas dataframe. Have fun!
+The actual HTTP request is not made until we call `get` on the instance. Boom! From this point on `df` is just your ordinary pandas dataframe. Have fun!
 
 ##Installation
 Just clone this repository and import the SCB module.
