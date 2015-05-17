@@ -67,17 +67,15 @@ class SCB():
         """
 
         headers = []
-        header_row = '<tr>'
         for header in data[0]:
             headers.append(header)
-            header_row += '<th>%s</th>' % header
-        header_row += '</tr>'
+        header_row = '<tr><th>' + '</th><th>'.join(headers) + '</th></th>'
             
+        sublevels = []
         for sublevel in data:
-            table_end += '<tr>'
             for prop in headers:
-                table_end += '<td>%s</td>' % sublevel[prop]
-            table_end += '</tr>'
+                sublevels.append(sublevel[prop])
+            table_end = '<tr><td>' + '</td><td>'.join(sublevels) + '</td></tr>'
             
         table_end += '</tbody></table>'
 
@@ -95,7 +93,7 @@ class SCB():
         table_end = """
         <tbody>
         """
-            
+
         for code in data:
             if len(code['values']) > 10:
                 values = ', '.join(map(str, code['values'][:5])) + ' [...] ' +\
