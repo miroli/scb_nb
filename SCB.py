@@ -69,13 +69,13 @@ class SCB():
         headers = []
         for header in data[0]:
             headers.append(header)
-        header_row = '<tr><th>' + '</th><th>'.join(headers) + '</th></th>'
+        header_row = '<tr><th>' + '</th><th>'.join(headers) + '</th></tr>'
             
-        sublevels = []
         for sublevel in data:
+            sublevels = []
             for prop in headers:
                 sublevels.append(sublevel[prop])
-            table_end = '<tr><td>' + '</td><td>'.join(sublevels) + '</td></tr>'
+            table_end += '<tr><td>' + '</td><td>'.join(sublevels) + '</td></tr>'
             
         table_end += '</tbody></table>'
 
