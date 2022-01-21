@@ -3,7 +3,7 @@ MarkupSafe==0.23
 backports.ssl-match-hostname==3.4.0.2
 certifi==2015.04.28
 gnureadline==6.3.3
-ipython==3.1.0
+ipython==7.16.3
 jsonschema==2.4.0
 matplotlib==1.4.3
 mock==1.0.1
